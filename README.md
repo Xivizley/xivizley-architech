@@ -1,5 +1,9 @@
 # XIVIZLEY Architech 📐⚡
 
+<p align="center">
+  <img src="public/og.png" alt="XIVIZLEY Architech Banner" width="100%" />
+</p>
+
 > **Industrial DIN 40719 Visual Docker Compose Architect & Deterministic Port Conflict Resolution Engine.**  
 > 100% Client-Side · Zero Telemetry · Offline Ready · 134+ Modules · 33 Curated Stacks
 
