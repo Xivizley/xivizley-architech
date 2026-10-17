@@ -14,6 +14,14 @@
 
 ---
 
+## 🎬 Live Demo
+
+<p align="center">
+  <img src="public/demo.gif" alt="XIVIZLEY Architech Animated Demo" width="100%" />
+</p>
+
+---
+
 ## 🚀 Overview
 
 **XIVIZLEY Architech** is a standalone, client-side visual architecture tool for orchestrating self-hosted Docker environments. It transforms complex `docker-compose.yml` configurations into an interactive schematic canvas following industrial DIN 40719 design guidelines.
