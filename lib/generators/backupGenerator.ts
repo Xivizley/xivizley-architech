@@ -54,7 +54,6 @@ export function generateBackupSuite(
   const cronSchedule = options.cronSchedule || '0 3 * * *';
   const enableEncryption = options.enableEncryption || false;
   const encryptionPassword = options.encryptionPassword?.trim() || BACKUP_PASSWORD_PLACEHOLDER;
-  const encryptionPasswordIsPlaceholder = !options.encryptionPassword?.trim();
   const discordWebhook = options.discordWebhook || '';
 
   const detectedDatabases: Array<{ name: string; type: string; command: string }> = [];
