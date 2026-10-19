@@ -8,7 +8,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { useArchitectStore } from '@/store/useArchitectStore';
-import { generateBackupSuite } from '@/lib/generators/backupGenerator';
+import { generateBackupSuite, generateBackupPassword } from '@/lib/generators/backupGenerator';
 import { useI18nStore } from '@/lib/i18n/store';
 import {
   Archive,
@@ -39,7 +39,7 @@ export function BackupStudioTab() {
   const [retentionDays, setRetentionDays] = useState(7);
   const [backupDir, setBackupDir] = useState('/var/backups/xivizley');
   const [enableEncryption, setEnableEncryption] = useState(false);
-  const [encryptionPassword, setEncryptionPassword] = useState('XIV-SECRET-BACKUP-KEY-2026!');
+  const [encryptionPassword, setEncryptionPassword] = useState('');
   const [discordWebhook, setDiscordWebhook] = useState('');
   const [copiedType, setCopiedType] = useState<string | null>(null);
   const [activeView, setActiveView] = useState<'backup' | 'restore' | 'cron'>('backup');
@@ -233,7 +233,13 @@ export function BackupStudioTab() {
               <input
                 type="checkbox"
                 checked={enableEncryption}
-                onChange={(e) => setEnableEncryption(e.target.checked)}
+                onChange={(e) => {
+                  const enabled = e.target.checked;
+                  setEnableEncryption(enabled);
+                  if (enabled && !encryptionPassword.trim()) {
+                    setEncryptionPassword(generateBackupPassword());
+                  }
+                }}
                 className="h-3.5 w-3.5 rounded-[2px] border-[#2B1A42] bg-[#06030D] text-[#8B5CF6]"
               />
               <span className="flex items-center gap-1.5">
@@ -250,13 +256,49 @@ export function BackupStudioTab() {
 
           {enableEncryption && (
             <div className="mt-2">
-              <input
-                type="text"
-                value={encryptionPassword}
-                onChange={(e) => setEncryptionPassword(e.target.value)}
-                placeholder="Şifreleme parolası"
-                className="w-full rounded-[2px] border border-amber-500/40 bg-[#06030D] px-2.5 py-1 text-xs text-amber-300 focus:outline-none"
-              />
+              <div className="flex gap-1.5">
+                <input
+                  type="text"
+                  value={encryptionPassword}
+                  onChange={(e) => setEncryptionPassword(e.target.value)}
+                  placeholder={
+                    isTr
+                      ? 'Şifreleme parolası (otomatik üretilir)'
+                      : isPt
+                        ? 'Senha de criptografia (gerada automaticamente)'
+                        : 'Encryption passphrase (auto-generated)'
+                  }
+                  className="w-full rounded-[2px] border border-amber-500/40 bg-[#06030D] px-2.5 py-1 text-xs text-amber-300 focus:outline-none focus:border-amber-400"
+                />
+                <button
+                  type="button"
+                  onClick={() => setEncryptionPassword(generateBackupPassword())}
+                  title={
+                    isTr
+                      ? 'Yeni rastgele parola üret'
+                      : isPt
+                        ? 'Gerar nova senha aleatória'
+                        : 'Generate a new random passphrase'
+                  }
+                  aria-label={
+                    isTr
+                      ? 'Yeni rastgele parola üret'
+                      : isPt
+                        ? 'Gerar nova senha aleatória'
+                        : 'Generate a new random passphrase'
+                  }
+                  className="shrink-0 rounded-[2px] border border-amber-500/40 bg-[#06030D] px-2 text-amber-300 transition-colors hover:border-amber-400 hover:text-amber-200"
+                >
+                  <RefreshCw className="h-3 w-3" />
+                </button>
+              </div>
+              <p className="mt-1 text-[10px] leading-snug text-amber-500/80">
+                {isTr
+                  ? 'Bu parolayı güvenli bir yere kaydedin: geri yükleme (restore.sh) için zorunludur.'
+                  : isPt
+                    ? 'Guarde esta senha em local seguro: ela é obrigatória para restaurar (restore.sh).'
+                    : 'Store this passphrase somewhere safe: restore.sh requires it to decrypt the archive.'}
+              </p>
             </div>
           )}
         </div>

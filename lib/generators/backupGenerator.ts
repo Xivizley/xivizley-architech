@@ -27,6 +27,24 @@ export interface BackupGenerationResult {
   detectedVolumes: string[];
 }
 
+/**
+ * Sentinel used when encryption is requested without a passphrase.
+ * It is intentionally NOT a usable key: generated scripts must fail loudly
+ * instead of silently encrypting with a well-known default.
+ */
+export const BACKUP_PASSWORD_PLACEHOLDER = 'CHANGE_ME_BEFORE_USE';
+
+/**
+ * Generates a fresh AES-256 passphrase (12 random bytes → 24 hex chars, `xiv-` prefixed).
+ * Uses the Web Crypto API, available in every browser and in Node 19+.
+ */
+export function generateBackupPassword(): string {
+  const bytes = new Uint8Array(12);
+  globalThis.crypto.getRandomValues(bytes);
+  const hex = Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0')).join('');
+  return `xiv-${hex}`;
+}
+
 export function generateBackupSuite(
   nodes: Node<ModuleNodeData>[],
   options: Partial<BackupConfigOptions> = {}
@@ -35,7 +53,8 @@ export function generateBackupSuite(
   const retentionDays = options.retentionDays || 7;
   const cronSchedule = options.cronSchedule || '0 3 * * *';
   const enableEncryption = options.enableEncryption || false;
-  const encryptionPassword = options.encryptionPassword || 'CHANGE_THIS_BACKUP_KEY_2026';
+  const encryptionPassword = options.encryptionPassword?.trim() || BACKUP_PASSWORD_PLACEHOLDER;
+  const encryptionPasswordIsPlaceholder = !options.encryptionPassword?.trim();
   const discordWebhook = options.discordWebhook || '';
 
   const detectedDatabases: Array<{ name: string; type: string; command: string }> = [];
@@ -201,6 +220,10 @@ fi
 ${
   enableEncryption
     ? `# 4. AES-256 Şifreleme Uygula
+if [ "${encryptionPassword}" = "${BACKUP_PASSWORD_PLACEHOLDER}" ]; then
+  log "❌ Şifreleme parolası değiştirilmedi. Bu script'i çalıştırmadan önce parolayı belirleyin."
+  exit 1
+fi
 log "🔐 Arşiv AES-256 CBC ile şifreleniyor..."
 openssl enc -aes-256-cbc -salt -pbkdf2 -in "\$FINAL_FILE" -out "\$FINAL_FILE.enc" -pass pass:"${encryptionPassword}"
 rm -f "\$FINAL_FILE"
@@ -254,6 +277,10 @@ mkdir -p "\$RESTORE_TEMP"
 ${
   enableEncryption
     ? `echo "🔐 [2/4] AES-256 Şifreli yedek çözülüyor..."
+if [ "${encryptionPassword}" = "${BACKUP_PASSWORD_PLACEHOLDER}" ]; then
+  echo "❌ Bu arşiv geçerli bir parola ile şifrelenmedi. restore.sh içindeki parolayı güncelleyin."
+  exit 1
+fi
 openssl enc -d -aes-256-cbc -pbkdf2 -in "\$ARCHIVE_PATH" -out "\$RESTORE_TEMP/unencrypted.tar.gz" -pass pass:"${encryptionPassword}"
 TARGET_ARCHIVE="\$RESTORE_TEMP/unencrypted.tar.gz"
 `
