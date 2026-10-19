@@ -1,0 +1,7 @@
+# pnpm 10+ reads dependency build-script approvals from this file
+# (the "pnpm" field in package.json is no longer read).
+# core-js only prints a donation banner in its postinstall; approving it keeps
+# `pnpm install` deterministic on pnpm >= 10 instead of failing with
+# ERR_PNPM_IGNORED_BUILDS during Docker builds and clean-clone installs.
+allowBuilds:
+  core-js: true
