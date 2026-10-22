@@ -85,7 +85,7 @@ export function PublicNav({ lang, altHref }: PublicNavProps) {
           </Link>
 
           <a
-            href="https://github.com/Xivizley/xivizley-architech"
+            href="https://github.com/Xivizley/xivizley-architect"
             target="_blank"
             rel="noreferrer"
             className="flex items-center gap-1.5 rounded-[2px] border border-[#2B1A42] bg-[#120A21] px-2 py-1.5 text-[#F5F3FF] transition-colors hover:border-[#8B5CF6]"

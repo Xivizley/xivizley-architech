@@ -25,11 +25,11 @@ Key technical decisions:
 - Disaster Recovery Scripts: Auto-generates backup.sh (volume snapshots + DB dumps) and restore.sh alongside docker-compose.yml.
 
 You can run it locally in seconds:
-docker run -d -p 3000:3000 ghcr.io/xivizley/xivizley-architech:latest
+docker run -d -p 3000:3000 ghcr.io/xivizley/xivizley-architect:latest
 or:
-git clone https://github.com/Xivizley/xivizley-architech.git && docker compose up -d
+git clone https://github.com/Xivizley/xivizley-architect.git && docker compose up -d
 
-GitHub: https://github.com/Xivizley/xivizley-architech
+GitHub: https://github.com/Xivizley/xivizley-architect
 
 Feedback and PRs are warmly welcomed!
 ```
@@ -58,13 +58,13 @@ I built **XIVIZLEY Architech** as an open-source, client-side visual orchestrato
 - 💾 **Disaster Recovery Generation:** Outputs hardened `backup.sh` and `restore.sh` scripts for volume compression and database snapshots.
 - 🔒 **Zero External Tracking / Fully Offline:** Runs completely inside your browser or local container. No external calls, no client-side telemetry.
 
-Repo (MIT): https://github.com/Xivizley/xivizley-architech
+Repo (MIT): https://github.com/Xivizley/xivizley-architect
 
 Quick start:
 ```bash
-docker run -d -p 3000:3000 ghcr.io/xivizley/xivizley-architech:latest
+docker run -d -p 3000:3000 ghcr.io/xivizley/xivizley-architect:latest
 # or:
-git clone https://github.com/Xivizley/xivizley-architech.git && docker compose up -d
+git clone https://github.com/Xivizley/xivizley-architect.git && docker compose up -d
 # Open http://localhost:3000
 ```
 
@@ -87,7 +87,7 @@ A standalone, 100% client-side visual Docker Compose architect with a determinis
 - Automated backup/restore scripts
 
 No external tracking. 100% MIT.
-https://github.com/Xivizley/xivizley-architech
+https://github.com/Xivizley/xivizley-architect
 ```
 
 **Tweet 2:**
@@ -95,5 +95,5 @@ https://github.com/Xivizley/xivizley-architech
 Why client-side?
 Most container tools want your credentials or phone-home analytics. Architech runs completely in your browser memory via Zustand + static Next.js.
 
-docker run -d -p 3000:3000 ghcr.io/xivizley/xivizley-architech:latest
+docker run -d -p 3000:3000 ghcr.io/xivizley/xivizley-architect:latest
 ```

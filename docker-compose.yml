@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: ghcr.io/xivizley/xivizley-architech:latest
+    image: ghcr.io/xivizley/xivizley-architect:latest
     container_name: xivizley-architech
     restart: unless-stopped
     ports:

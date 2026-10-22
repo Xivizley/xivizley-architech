@@ -109,8 +109,8 @@ export default function EnglishHomePage() {
             Clone the repository and start the container — no cloud dependency required.
           </p>
           <pre className="overflow-x-auto rounded-[2px] border border-[#2B1A42] bg-[#06030D] p-3 font-mono text-[12px] text-emerald-400">
-{`git clone https://github.com/Xivizley/xivizley-architech.git
-cd xivizley-architech
+{`git clone https://github.com/Xivizley/xivizley-architect.git
+cd xivizley-architect
 docker compose up -d`}
           </pre>
         </div>

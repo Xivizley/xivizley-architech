@@ -11,7 +11,7 @@
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](docker-compose.yml)
 [![Next.js](https://img.shields.io/badge/Next.js-16.3-black?logo=next.js)](https://nextjs.org)
 [![React Flow](https://img.shields.io/badge/React_Flow-11.11-FF0072)](https://reactflow.dev)
-[![Release](https://img.shields.io/badge/Release-v1.1.0-8B5CF6?logo=github)](https://github.com/Xivizley/xivizley-architech/releases)
+[![Release](https://img.shields.io/badge/Release-v1.1.0-8B5CF6?logo=github)](https://github.com/Xivizley/xivizley-architect/releases)
 [![Verified Benchmarks](https://img.shields.io/badge/Benchmarks-fio_%26_sysbench-22C55E)](/benchmark)
 
 ---
@@ -89,8 +89,8 @@ Raw `fio` and `sysbench` console output, the exact reproduction commands, and th
 
 ```bash
 # Clone repository
-git clone https://github.com/Xivizley/xivizley-architech.git
-cd xivizley-architech
+git clone https://github.com/Xivizley/xivizley-architect.git
+cd xivizley-architect
 
 # Launch container
 docker compose up -d
