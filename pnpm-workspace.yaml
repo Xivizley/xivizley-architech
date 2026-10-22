@@ -3,5 +3,11 @@
 # core-js only prints a donation banner in its postinstall; approving it keeps
 # `pnpm install` deterministic on pnpm >= 10 instead of failing with
 # ERR_PNPM_IGNORED_BUILDS during Docker builds and clean-clone installs.
+#
+# `packages` is not optional: the Dockerfile pins pnpm 9.x, and pnpm 9 rejects a
+# workspace manifest without it ("packages field missing or empty"). The single
+# entry keeps the repo a one-package workspace for every pnpm major.
+packages:
+  - '.'
 allowBuilds:
   core-js: true
