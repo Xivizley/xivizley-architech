@@ -21,7 +21,7 @@ I built XIVIZLEY Architech because managing multi-container homelab stacks frequ
 Key technical decisions:
 - 100% Client-Side & Offline: Runs entirely in the browser using Next.js static prerendering + Zustand state. There is no external tracking, no backend database, and no client-side telemetry.
 - Deterministic Port Conflict Engine: Tracks TCP/UDP allocations across 134+ pre-configured modules and offers deterministic automated resolution suggestions.
-- DIN 40719 Blueprint: Renders printable industrial schematic specification sheets for documentation.
+- DIN EN 61082-1 Blueprint: Renders printable industrial schematic specification sheets for documentation.
 - Disaster Recovery Scripts: Auto-generates backup.sh (volume snapshots + DB dumps) and restore.sh alongside docker-compose.yml.
 
 You can run it locally in seconds:
@@ -52,7 +52,7 @@ Whenever I spin up larger self-hosted stacks (e.g. Nextcloud + Jellyfin + Vaultw
 
 I built **XIVIZLEY Architech** as an open-source, client-side visual orchestrator:
 
-- 📐 **DIN 40719 Schematics:** Drag-and-drop React Flow canvas designed like an industrial schematic.
+- 📐 **DIN EN 61082-1 Schematics:** Drag-and-drop React Flow canvas designed like an industrial schematic.
 - ⚡ **134+ Docker Modules & 33 Curated Stacks:** Pre-configured environments, volumes, and healthchecks.
 - 🛡️ **Instant Port Collision Radar:** Detects overlapping host ports in real time and re-assigns alternatives with a single click.
 - 💾 **Disaster Recovery Generation:** Outputs hardened `backup.sh` and `restore.sh` scripts for volume compression and database snapshots.
@@ -83,7 +83,7 @@ A standalone, 100% client-side visual Docker Compose architect with a determinis
 
 - 134+ Docker modules & 33 curated stacks
 - Instant deterministic port collision radar
-- DIN 40719 blueprint spec generator
+- DIN EN 61082-1 blueprint spec generator
 - Automated backup/restore scripts
 
 No external tracking. 100% MIT.

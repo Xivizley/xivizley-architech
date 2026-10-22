@@ -3,7 +3,7 @@
 // ============================================================
 // XIVIZLEY — Master Auto-Backup & Disaster Recovery Studio
 // components/output/BackupStudioTab.tsx
-// Design: Obsidian Violet DIN 40719 Industrial Specification
+// Design: Obsidian Violet DIN EN 61082-1 Industrial Specification
 // ============================================================
 
 import React, { useState, useMemo } from 'react';
@@ -22,6 +22,8 @@ import {
   Database,
   FolderArchive,
   RefreshCw,
+  Eye,
+  EyeOff,
   Terminal,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -40,6 +42,7 @@ export function BackupStudioTab() {
   const [backupDir, setBackupDir] = useState('/var/backups/xivizley');
   const [enableEncryption, setEnableEncryption] = useState(false);
   const [encryptionPassword, setEncryptionPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [discordWebhook, setDiscordWebhook] = useState('');
   const [copiedType, setCopiedType] = useState<string | null>(null);
   const [activeView, setActiveView] = useState<'backup' | 'restore' | 'cron'>('backup');
@@ -126,7 +129,7 @@ export function BackupStudioTab() {
 
   return (
     <div className="flex flex-col h-full overflow-y-auto p-4 space-y-4 bg-[#090514] text-[#F5F3FF] font-mono scrollbar-thin scrollbar-thumb-[#2B1A42]">
-      {/* ── Header Banner (DIN 40719 Spec) ── */}
+      {/* ── Header Banner (DIN EN 61082-1 Spec) ── */}
       <div className="rounded-[2px] border border-[#2B1A42] bg-[#120A21] p-3.5 shadow-xl">
         <div className="flex items-center gap-3">
           <div className="flex h-9 w-9 items-center justify-center rounded-[2px] bg-[#06030D] text-[#C084FC] border border-[#2B1A42]">
@@ -175,7 +178,9 @@ export function BackupStudioTab() {
           <span className="text-[10px] text-[#8B7D9E]">/var/backups/xivizley</span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+        {/* Single column: the sidebar is too narrow for two native selects,
+            which truncate their option labels mid-word ("Nightly at 03:00 ("). */}
+        <div className="grid grid-cols-1 gap-2.5 text-xs">
           {/* Schedule Select */}
           <div>
             <label className="block text-[10px] text-[#8B7D9E] uppercase mb-1">
@@ -183,7 +188,7 @@ export function BackupStudioTab() {
             </label>
             <select
               value={schedule}
-              onChange={(e) => setSchedule(e.target.value as any)}
+              onChange={(e) => setSchedule(e.target.value as 'daily' | 'twice_daily' | 'weekly' | 'custom')}
               className="w-full rounded-[2px] border border-[#2B1A42] bg-[#06030D] px-2.5 py-1.5 text-xs text-[#F5F3FF] focus:outline-none focus:border-[#8B5CF6]"
             >
               <option value="daily">{isTr ? 'Her Gece 03:00 (Önerilen)' : 'Nightly at 03:00 (Recommended)'}</option>
@@ -258,7 +263,7 @@ export function BackupStudioTab() {
             <div className="mt-2">
               <div className="flex gap-1.5">
                 <input
-                  type="text"
+                  type={showPassword ? 'text' : 'password'}
                   value={encryptionPassword}
                   onChange={(e) => setEncryptionPassword(e.target.value)}
                   placeholder={
@@ -268,8 +273,25 @@ export function BackupStudioTab() {
                         ? 'Senha de criptografia (gerada automaticamente)'
                         : 'Encryption passphrase (auto-generated)'
                   }
-                  className="w-full rounded-[2px] border border-amber-500/40 bg-[#06030D] px-2.5 py-1 text-xs text-amber-300 focus:outline-none focus:border-amber-400"
+                  className="w-full rounded-[2px] border border-amber-500/40 bg-[#06030D] px-2.5 py-1 text-xs text-amber-300 focus:outline-none focus:border-amber-400 font-mono"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  title={
+                    showPassword
+                      ? (isTr ? 'Parolayı gizle' : isPt ? 'Ocultar senha' : 'Hide passphrase')
+                      : (isTr ? 'Parolayı göster' : isPt ? 'Mostrar senha' : 'Show passphrase')
+                  }
+                  aria-label={
+                    showPassword
+                      ? (isTr ? 'Parolayı gizle' : isPt ? 'Ocultar senha' : 'Hide passphrase')
+                      : (isTr ? 'Parolayı göster' : isPt ? 'Mostrar senha' : 'Show passphrase')
+                  }
+                  className="shrink-0 rounded-[2px] border border-amber-500/40 bg-[#06030D] px-2 text-amber-300 transition-colors hover:border-amber-400 hover:text-amber-200"
+                >
+                  {showPassword ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
+                </button>
                 <button
                   type="button"
                   onClick={() => setEncryptionPassword(generateBackupPassword())}

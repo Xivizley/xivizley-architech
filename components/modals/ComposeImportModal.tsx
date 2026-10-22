@@ -2,7 +2,7 @@
 
 // ============================================================
 // XIVIZLEY — Universal Reverse Engineering Studio
-// Obsidian Violet & DIN 40719 Industrial Hardware Spec
+// Obsidian Violet & DIN EN 61082-1 Industrial Hardware Spec
 // Parses docker-compose.yml, docker run commands & bash scripts
 // ============================================================
 
@@ -216,7 +216,7 @@ export function ComposeImportModal({ isOpen, onClose, onToast }: ComposeImportMo
                   ? 'Engenharia Reversa // Estúdio de Raio-X'
                   : 'Universal Reverse Engineering Studio'}
                 <span className="rounded-[2px] bg-[#1E1235] px-2 py-0.5 text-[9px] font-mono font-bold text-[#C084FC] border border-[#2B1A42]">
-                  DIN 40719
+                  DIN EN 61082-1
                 </span>
                 <span className="rounded-[2px] bg-[#090514] px-1.5 py-0.5 text-[9px] font-mono text-[#8B7D9E] border border-[#2B1A42]">
                   MULTI-FORMAT
@@ -361,7 +361,7 @@ export function ComposeImportModal({ isOpen, onClose, onToast }: ComposeImportMo
             <div className="rounded-[2px] border border-[#2B1A42] bg-[#06030D] p-3 space-y-2">
               <div className="flex items-center justify-between text-[10px] font-mono text-[#8B7D9E] uppercase">
                 <span>{isTr ? 'Röntgen Önizlemesi (Tespit Edilen Düğümler):' : 'X-Ray Preview (Detected Nodes):'}</span>
-                <span>3-Tier DIN 40719</span>
+                <span>3-Tier DIN EN 61082-1</span>
               </div>
               <div className="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto scrollbar-thin scrollbar-thumb-[#2B1A42]">
                 {previewAnalysis.stackNodes.map((n, idx) => (
@@ -402,7 +402,7 @@ export function ComposeImportModal({ isOpen, onClose, onToast }: ComposeImportMo
               </span>
             </div>
             <span className="text-[10px] text-[#A19BAF] shrink-0">
-              DIN 40719 Schematics
+              DIN EN 61082-1 Schematics
             </span>
           </div>
         </div>

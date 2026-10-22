@@ -20,5 +20,5 @@ export const PLATFORM_STATS = {
   engineName: 'XIVIZLEY Engine',
   sentinelName: 'XIVIZLEY Sentinel',
   taglineTr: "XIVIZLEY, 134 Docker servisini görsel tuvalde sürükle-bırak bağlayıp tek SSH komutuyla VDS'e kuran, ücretsiz ve MIT lisanslı self-host mimarlık aracıdır.",
-  taglineEn: "XIVIZLEY is a free, visual self-hosted architecture tool to connect 134 Docker services via canvas and deploy via SSH.",
+  taglineEn: "XIVIZLEY is a free, visual Docker Compose architect with deterministic port conflict detection, DIN EN 61082-1 hardware sizing radar, and 1-click SSH deployment for 134+ containers.",
 } as const;

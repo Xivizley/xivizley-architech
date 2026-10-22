@@ -223,8 +223,23 @@ if [ "${encryptionPassword}" = "${BACKUP_PASSWORD_PLACEHOLDER}" ]; then
   log "❌ Şifreleme parolası değiştirilmedi. Bu script'i çalıştırmadan önce parolayı belirleyin."
   exit 1
 fi
+# Parola kaynağı (öncelik sırası):
+#   1) XIVIZLEY_BACKUP_PASS ortam değişkeni   (cron / CI için önerilir)
+#   2) ${backupDir}/backup.pass dosyası        (chmod 600 önerilir)
+#   3) Etkileşimli terminal                   (girdi ekrana yazılmaz)
+#   4) Bu script'e gömülü değer
+BACKUP_PASS="\${XIVIZLEY_BACKUP_PASS:-}"
+if [ -z "\$BACKUP_PASS" ] && [ -f "${backupDir}/backup.pass" ]; then
+  BACKUP_PASS="\$(tr -d '\\r\\n' < "${backupDir}/backup.pass")"
+fi
+if [ -z "\$BACKUP_PASS" ] && [ -t 0 ]; then
+  read -r -s -p "🔑 Yedek şifreleme parolası: " BACKUP_PASS; echo
+fi
+BACKUP_PASS="\${BACKUP_PASS:-${encryptionPassword}}"
+export BACKUP_PASS
 log "🔐 Arşiv AES-256 CBC ile şifreleniyor..."
-openssl enc -aes-256-cbc -salt -pbkdf2 -in "\$FINAL_FILE" -out "\$FINAL_FILE.enc" -pass pass:"${encryptionPassword}"
+openssl enc -aes-256-cbc -salt -pbkdf2 -in "\$FINAL_FILE" -out "\$FINAL_FILE.enc" -pass env:BACKUP_PASS
+unset BACKUP_PASS
 rm -f "\$FINAL_FILE"
 FINAL_FILE="\$FINAL_FILE.enc"
 `
@@ -240,7 +255,7 @@ find "\$BACKUP_ROOT" -type f -name "xivizley_backup_*" -mtime +\$RETENTION_DAYS 
 
 BACKUP_SIZE=$(du -h "\$FINAL_FILE" | cut -f1)
 log "✅ Yedekleme başarıyla tamamlandı! Boyut: \$BACKUP_SIZE -> \$FINAL_FILE"
-notify_discord "SUCCESS" "Yedekleme başarıyla oluşturuldu!\\n📁 **Dosya:** \`\$ARCHIVE_NAME\`\\n💾 **Boyut:** \`\$BACKUP_SIZE\`\\n⏳ **Saklama Süresi:** ${retentionDays} gün"
+notify_discord "SUCCESS" "Yedekleme başarıyla oluşturuldu!\\n📁 **Dosya:** \\\`$ARCHIVE_NAME\\\`\\n💾 **Boyut:** \\\`$BACKUP_SIZE\\\`\\n⏳ **Saklama Süresi:** ${retentionDays} gün"
 
 exit 0
 `;
@@ -280,7 +295,18 @@ if [ "${encryptionPassword}" = "${BACKUP_PASSWORD_PLACEHOLDER}" ]; then
   echo "❌ Bu arşiv geçerli bir parola ile şifrelenmedi. restore.sh içindeki parolayı güncelleyin."
   exit 1
 fi
-openssl enc -d -aes-256-cbc -pbkdf2 -in "\$ARCHIVE_PATH" -out "\$RESTORE_TEMP/unencrypted.tar.gz" -pass pass:"${encryptionPassword}"
+# Parola kaynağı (öncelik sırası): XIVIZLEY_BACKUP_PASS > ${backupDir}/backup.pass > TTY sor > gömülü değer
+BACKUP_PASS="\${XIVIZLEY_BACKUP_PASS:-}"
+if [ -z "\$BACKUP_PASS" ] && [ -f "${backupDir}/backup.pass" ]; then
+  BACKUP_PASS="\$(tr -d '\\r\\n' < "${backupDir}/backup.pass")"
+fi
+if [ -z "\$BACKUP_PASS" ] && [ -t 0 ]; then
+  read -r -s -p "🔑 Yedek şifreleme parolası: " BACKUP_PASS; echo
+fi
+BACKUP_PASS="\${BACKUP_PASS:-${encryptionPassword}}"
+export BACKUP_PASS
+openssl enc -d -aes-256-cbc -pbkdf2 -in "\$ARCHIVE_PATH" -out "\$RESTORE_TEMP/unencrypted.tar.gz" -pass env:BACKUP_PASS
+unset BACKUP_PASS
 TARGET_ARCHIVE="\$RESTORE_TEMP/unencrypted.tar.gz"
 `
     : `TARGET_ARCHIVE="\$ARCHIVE_PATH"`

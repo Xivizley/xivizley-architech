@@ -90,7 +90,7 @@ export function Navbar({
 
   return (
     <header className="sticky top-0 z-40 flex h-13 w-full items-center justify-between border-b border-[#2B1A42] bg-[#090514]/95 px-4 backdrop-blur-md">
-      {/* Brand & DIN 40719 Industrial Stamp */}
+      {/* Brand & DIN EN 61082-1 Industrial Stamp */}
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-2">
           <div className="flex h-7 w-7 items-center justify-center rounded-[2px] border border-[#8B5CF6]/50 bg-[#120A21] text-[#C084FC] shadow-sm">
@@ -102,10 +102,10 @@ export function Navbar({
                 XIVIZLEY <span className="text-[#8B5CF6]">ARCHITECH</span>
               </span>
               <span className="rounded-[2px] border border-[#2B1A42] bg-[#120A21] px-1.5 py-0.2 font-mono text-[9px] font-bold text-[#A78BFA]">
-                DIN 40719
+                DIN EN 61082-1
               </span>
               <span className="hidden sm:inline rounded-[2px] border border-emerald-500/30 bg-emerald-950/40 px-1 py-0.2 font-mono text-[9px] text-emerald-400">
-                v1.0.0 CORE
+                v1.3.0 CORE
               </span>
             </div>
             <span className="hidden md:inline font-mono text-[9px] text-[#8B7D9E]">

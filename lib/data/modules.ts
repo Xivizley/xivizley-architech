@@ -1656,6 +1656,7 @@ export const MODULE_CATALOG: ModuleDefinition[] = [
     volumes: [
       { hostPath: './ollama/data', containerPath: '/root/.ollama', label: 'İndirilen Yapay Zeka Modelleri' },
     ],
+    resources: { ramMB: 2048, cpuCores: 2, diskGB: 20 },
     suggestedDependencies: [
       { moduleId: 'open-webui', reason: 'ChatGPT benzeri kullanıcı dostu sohbet arayüzü' },
     ],
@@ -1679,6 +1680,7 @@ export const MODULE_CATALOG: ModuleDefinition[] = [
     volumes: [
       { hostPath: './open-webui/data', containerPath: '/app/backend/data', label: 'Kullanıcı Sohbetleri ve Ayarlar' },
     ],
+    resources: { ramMB: 512, cpuCores: 1, diskGB: 5 },
     suggestedDependencies: [
       { moduleId: 'ollama', reason: 'Yapay zeka modellerini çalıştıran arka uç servisi' },
     ],

@@ -4,7 +4,7 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'XIVIZLEY Architech — Visual Docker Canvas & Port Conflict Engine',
   description:
-    'Industrial DIN 40719 visual Docker compose architect and deterministic port conflict resolution engine. 134+ modules, 33 curated stacks, 100% offline and client-side.',
+    'Industrial DIN EN 61082-1 visual Docker compose architect and deterministic port conflict resolution engine. 134+ modules, 33 curated stacks, 100% offline and client-side.',
   authors: [{ name: 'Alperen Celal Hoşça', url: 'https://github.com/alperencelal' }],
   keywords: [
     'docker-compose',
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     'port-conflict-detector',
     'react-flow',
     'homelab',
-    'din-40719',
+    'din-en-61082-1',
     'devops',
   ],
   openGraph: {

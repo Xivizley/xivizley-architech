@@ -1,13 +1,13 @@
 // ============================================================
 // XIVIZLEY — Press & Media Kit Page (/en/press)
-// Obsidian Violet & DIN 40719 Editorial Standard
+// Obsidian Violet & DIN EN 61082-1 Editorial Standard
 // Institutional Presentation for Journalists, Partners & Media
 // ============================================================
 
 import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { PublicNav } from '@/components/shared/PublicNav';
+import { Navbar } from '@/components/shared/Navbar';
 import { PRESS_KIT } from '@/lib/data/press';
 
 export const metadata: Metadata = {
@@ -54,10 +54,10 @@ export default function EnglishPressPage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-[#090514] text-[#F5F3FF] selection:bg-[#8B5CF6]/30 selection:text-white font-sans antialiased">
-      <PublicNav lang="en" altHref="/press" />
+      <Navbar />
 
       <main className="flex-1 mx-auto w-full max-w-5xl px-4 sm:px-6 py-12">
-        {/* DIN 40719 Header */}
+        {/* DIN EN 61082-1 Header */}
         <div className="border border-[#2B1A42] bg-[#0D0719] rounded-[2px] p-6 mb-8 relative">
           <div className="flex flex-wrap items-center gap-2 mb-3">
             <span className="font-mono text-[11px] px-2 py-0.5 rounded-[2px] bg-[#120A21] border border-[#2B1A42] text-[#C084FC]">
@@ -100,7 +100,7 @@ export default function EnglishPressPage() {
             [ EXECUTIVE SUMMARY // 1 PARAGRAPH ]
           </span>
           <p className="text-sm sm:text-base text-[#F5F3FF] leading-relaxed italic border-l-2 border-[#8B5CF6] pl-4 py-1">
-            &ldquo;XIVIZLEY is an open-source (MIT) system architecture platform developed under the TÜBİTAK 2204-A research program. It connects 134 popular Docker services on a visual drag-and-drop schematic canvas, deterministically solves port conflicts before server deployment, and exports industrial DIN 40719 specification sheets, Kubernetes manifests, Helm 3 packages, and automated disaster recovery scripts for Linux and homelab servers.&rdquo;
+            &ldquo;XIVIZLEY is an open-source (MIT) system architecture platform developed under the TÜBİTAK 2204-A research program. It connects 134 popular Docker services on a visual drag-and-drop schematic canvas, deterministically solves port conflicts before server deployment, and exports industrial DIN EN 61082-1 specification sheets, Kubernetes manifests, Helm 3 packages, and automated disaster recovery scripts for Linux and homelab servers.&rdquo;
           </p>
         </div>
 
@@ -129,7 +129,7 @@ export default function EnglishPressPage() {
             </div>
             <div className="border border-[#2B1A42] bg-[#0D0719] rounded-[2px] p-5">
               <span className="font-mono text-[11px] text-[#C084FC] block mb-1">Industrial Export</span>
-              <span className="text-lg font-bold font-mono text-[#F5F3FF] block mb-1">DIN 40719, K8s & Helm 3</span>
+              <span className="text-lg font-bold font-mono text-[#F5F3FF] block mb-1">DIN EN 61082-1, K8s & Helm 3</span>
               <p className="text-xs text-[#A19BAF] font-mono">
                 Produces printable engineering blueprints and cloud-native Kubernetes packages.
               </p>
@@ -186,7 +186,7 @@ export default function EnglishPressPage() {
               Hardware Benchmark Spec →
             </Link>
             <Link
-              href="/"
+              href="/architect"
               className="px-5 py-2 font-mono text-xs font-semibold bg-[#8B5CF6] hover:bg-[#7C3AED] text-white transition-colors rounded-[2px]"
             >
               Open Architecture Canvas →

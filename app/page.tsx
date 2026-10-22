@@ -122,7 +122,7 @@ export default function ArchitectPage() {
       <div className="relative flex flex-1 overflow-hidden">
         <ModuleSidebar />
 
-        <main className="relative flex-1 overflow-hidden">
+        <main className="relative @container flex-1 overflow-hidden">
           <ArchitectCanvas />
         </main>
 

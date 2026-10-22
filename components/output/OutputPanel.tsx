@@ -266,7 +266,9 @@ function NodeConfigPanel() {
           <div>
             <h3 className="text-sm font-semibold text-[#F5F3FF]">{selectedNode.data.label}</h3>
             <p className="text-[10px] text-[#8B7D9E] font-mono mt-0.5">
-              {moduleDef.dockerImage}:{moduleDef.defaultTag}
+              {moduleDef.dockerImage
+                ? `${moduleDef.dockerImage}${moduleDef.defaultTag ? `:${moduleDef.defaultTag}` : ''}`
+                : 'None (Host Runtime)'}
             </p>
           </div>
         </div>
@@ -714,7 +716,7 @@ export function OutputPanel({ isOpen, onToggle, onOpenDeploy }: OutputPanelProps
       {isOpen && (
         <>
           {/* Tabs */}
-          <div className="flex border-b border-[#2B1A42] shrink-0 overflow-x-auto scrollbar-none bg-[#090514]">
+          <div className="grid grid-cols-3 border-b border-[#2B1A42] shrink-0 bg-[#090514]">
             {(
               [
                 { id: 'compose'      as Tab, label: 'Compose',                                             icon: FileCode2 },
@@ -732,7 +734,7 @@ export function OutputPanel({ isOpen, onToggle, onOpenDeploy }: OutputPanelProps
                 key={id}
                 onClick={() => setActiveTab(id)}
                 className={cn(
-                  'flex flex-1 items-center justify-center gap-1.5 px-2 py-2.5 text-xs font-semibold whitespace-nowrap transition-all font-mono',
+                  'flex items-center justify-center gap-1 px-1.5 py-2 text-[11px] font-semibold whitespace-nowrap transition-all font-mono',
                   activeTab === id
                     ? 'border-b-2 border-[#8B5CF6] text-[#F5F3FF] bg-[#120A21]'
                     : 'border-b-2 border-transparent text-[#8B7D9E] hover:text-[#C084FC]',

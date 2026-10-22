@@ -2,7 +2,7 @@
 
 // ============================================================
 // XIVIZLEY — Pro Studio Cyber Edge Component
-// Obsidian Violet & DIN 40719 Industrial Hardware Spec
+// Obsidian Violet & DIN EN 61082-1 Industrial Hardware Spec
 // Flowing electric violet data lines with deterministic protocol telemetry
 // ============================================================
 
@@ -188,11 +188,19 @@ function CyberEdgeInner({
   // Dynamic stroke color based on conflict and simulation state
   const isConflictWire = isSimulating && protocolInfo.isConflict;
 
+  // Project files saved before the Obsidian Violet migration carry a legacy cyan
+  // (#06b6d4) stroke on their edges. Suppress it so rehydrated canvases render with
+  // the current violet gradient instead of a stray cyan wire.
+  const legacyStroke = typeof style?.stroke === 'string' ? style.stroke : undefined;
+  const isCyanStroke = legacyStroke?.toLowerCase() === '#06b6d4';
+
   const resolvedStroke = isConflictWire
     ? '#F43F5E'
     : selected
     ? '#C084FC'
-    : style?.stroke || `url(#${gradientId})`;
+    : isCyanStroke
+    ? `url(#${gradientId})`
+    : legacyStroke || `url(#${gradientId})`;
 
   const cleanStyle: React.CSSProperties = {
     ...style,

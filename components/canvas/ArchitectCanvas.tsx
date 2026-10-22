@@ -140,7 +140,7 @@ function CanvasBottomDock({
   };
 
   return (
-    <div className="pointer-events-auto absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1 sm:gap-1.5 rounded-[2px] border border-[#2B1A42] bg-[#0D0719]/95 backdrop-blur-md p-1 shadow-2xl max-w-[calc(100%-80px)] overflow-x-auto scrollbar-none font-mono">
+    <div className="pointer-events-auto absolute bottom-3 inset-x-0 mx-auto w-max z-20 flex items-center gap-1 sm:gap-1.5 rounded-[2px] border border-[#2B1A42] bg-[#0D0719]/95 backdrop-blur-md p-1 shadow-2xl max-w-[calc(100%-2rem)] overflow-x-auto scrollbar-none font-mono">
       {/* Live Security Pod (when nodes exist) */}
       {hasNodes && (
         <>
@@ -271,8 +271,8 @@ function CanvasToolbar({ onOpenStackPacks }: { onOpenStackPacks?: () => void }) 
   }, [fitView]);
 
   return (
-    <div className="relative">
-      <div className="pointer-events-auto flex items-center gap-1 rounded-[2px] border border-[#2B1A42] bg-[#0D0719]/95 backdrop-blur-md p-1 shadow-2xl max-w-full overflow-x-auto scrollbar-none font-mono">
+    <div className="relative min-w-0 max-w-full">
+      <div className="pointer-events-auto flex flex-nowrap items-center gap-1 rounded-[2px] border border-[#2B1A42] bg-[#0D0719]/95 backdrop-blur-md p-1 shadow-2xl max-w-full overflow-x-auto scrollbar-none @min-[480px]:flex-wrap @min-[480px]:overflow-visible font-mono">
         {/* Studio HUD Badge Pod */}
         <div className="hidden 2xl:flex items-center gap-1.5 px-2 py-0.5 rounded-[2px] bg-[#120A21] border border-[#2B1A42] text-[10px] font-mono font-bold text-[#C084FC] mr-0.5 select-none shrink-0">
           <span className="relative flex h-1.5 w-1.5">
@@ -813,12 +813,12 @@ function CanvasContent({ onInit, onOpenStoryCard, onOpenStackPacks, onToast, isE
 
       {/* ─── Top Floating Canvas Header Dock (Zero-Overlap Responsive Flex) ─── */}
       {!isEmbed && (
-        <div className="pointer-events-none absolute top-3 inset-x-3 z-30 flex items-start justify-between gap-2.5">
+        <div className="pointer-events-none absolute top-3 inset-x-3 z-30 flex flex-wrap items-start justify-between gap-2.5">
           {/* Left: Action Toolbar */}
           <CanvasToolbar onOpenStackPacks={handleStackPacksTrigger} />
 
           {/* Right: Hardware Estimator */}
-          <div className="pointer-events-auto flex flex-col items-end gap-1.5 shrink-0">
+          <div className="pointer-events-auto ml-auto flex flex-col items-end gap-1.5 shrink-0">
             <HardwareEstimator />
           </div>
         </div>

@@ -53,7 +53,23 @@ export const DEFAULT_MODULE_RESOURCES: Record<string, ResourceRequirement> = {
   'mealie': { ramMB: 512, cpuCores: 0.5, diskGB: 2 },
   'audiobookshelf': { ramMB: 512, cpuCores: 0.5, diskGB: 10 },
   'romm': { ramMB: 1024, cpuCores: 1, diskGB: 15 },
+  'ollama': { ramMB: 2048, cpuCores: 2, diskGB: 20 },
+  'ollama-ai': { ramMB: 2048, cpuCores: 2, diskGB: 20 },
+  'open-webui': { ramMB: 512, cpuCores: 1, diskGB: 5 },
 };
+
+// Single source of truth for modules that ship without an explicit
+// `resources` block in the catalog. Every surface (hardware bar, DIN
+// blueprint, node cards) must resolve through this helper, otherwise the
+// canvas and the spec sheet report different totals for the same stack.
+export const FALLBACK_RESOURCES: ResourceRequirement = { ramMB: 256, cpuCores: 0.5, diskGB: 2 };
+
+export function resolveModuleResources(
+  moduleId: string,
+  catalogResources?: ResourceRequirement | null
+): ResourceRequirement {
+  return catalogResources ?? DEFAULT_MODULE_RESOURCES[moduleId] ?? FALLBACK_RESOURCES;
+}
 
 export interface DeviceRecommendation {
   title: string;
@@ -95,11 +111,7 @@ export function calculateHardwareEstimate(nodes: ArchitectNode[], lang: 'tr' | '
 
   for (const node of nodes) {
     const modDef = MODULE_CATALOG.find((m) => m.id === node.data.moduleId);
-    const res = modDef?.resources ?? DEFAULT_MODULE_RESOURCES[node.data.moduleId] ?? {
-      ramMB: 256,
-      cpuCores: 0.5,
-      diskGB: 2,
-    };
+    const res = resolveModuleResources(node.data.moduleId, modDef?.resources);
 
     ramMB += res.ramMB;
     cpuCores += res.cpuCores;

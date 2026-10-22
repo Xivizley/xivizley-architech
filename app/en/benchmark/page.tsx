@@ -1,13 +1,13 @@
 // ============================================================
-// XIVIZLEY — DIN 40719 Verified Hardware Benchmark Report (/en/benchmark)
-// Obsidian Violet & DIN 40719 Industrial Hardware Specification
+// XIVIZLEY — DIN EN 61082-1 Verified Hardware Benchmark Report (/en/benchmark)
+// Obsidian Violet & DIN EN 61082-1 Industrial Hardware Specification
 // Direct Measurements from XIVIZLEY Bursa PenDC Tier-3 Hardware
 // ============================================================
 
 import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { PublicNav } from '@/components/shared/PublicNav';
+import { Navbar } from '@/components/shared/Navbar';
 import { VERIFIED_BENCHMARK_DATA } from '@/lib/data/benchmark';
 
 export const metadata: Metadata = {
@@ -54,13 +54,13 @@ export default function EnglishBenchmarkPage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-[#090514] text-[#F5F3FF] selection:bg-[#8B5CF6]/30 selection:text-white font-sans antialiased">
-      <PublicNav lang="en" altHref="/benchmark" />
+      <Navbar />
 
       <main className="flex-1 mx-auto w-full max-w-6xl px-4 sm:px-6 py-12">
-        {/* DIN 40719 Title Block / Header */}
+        {/* DIN EN 61082-1 Title Block / Header */}
         <div className="border border-[#2B1A42] bg-[#0D0719] rounded-[2px] p-6 mb-8 relative overflow-hidden">
           <div className="absolute top-0 right-0 border-l border-b border-[#2B1A42] bg-[#120A21] px-3 py-1 font-mono text-[10px] text-[#A78BFA] uppercase tracking-wider">
-            DIN 40719 // SPEC-2026-R1
+            DIN EN 61082-1 // SPEC-2026-R1
           </div>
 
           <div className="flex flex-wrap items-center gap-2 mb-3">
@@ -173,7 +173,7 @@ export default function EnglishBenchmarkPage() {
         {/* Detailed Hardware Spec Sheet */}
         <div className="border border-[#2B1A42] bg-[#0D0719] rounded-[2px] mb-8 overflow-hidden">
           <div className="border-b border-[#2B1A42] bg-[#120A21] px-5 py-3 font-mono text-xs text-[#F5F3FF] font-semibold tracking-wide uppercase flex items-center justify-between">
-            <span>[ SYSTEM SPECIFICATION MATRIX — DIN 40719 ]</span>
+            <span>[ SYSTEM SPECIFICATION MATRIX — DIN EN 61082-1 ]</span>
             <span className="text-[#8B7D9E] text-[10px]">SECTION 01 // CORE HARDWARE</span>
           </div>
 
@@ -250,7 +250,7 @@ export default function EnglishBenchmarkPage() {
               Press & Media Kit →
             </Link>
             <Link
-              href="/"
+              href="/architect"
               className="px-5 py-2 font-mono text-xs font-semibold bg-[#8B5CF6] hover:bg-[#7C3AED] text-white transition-colors rounded-[2px]"
             >
               Open Architecture Canvas →

@@ -3,7 +3,7 @@
 // lib/parsers/composeParser.ts
 //
 // Converts docker-compose.yml, docker run commands, or bash
-// install scripts into 3-tier DIN 40719 visual canvas schematics.
+// install scripts into 3-tier DIN EN 61082-1 visual canvas schematics.
 // ============================================================
 
 import * as yaml from 'js-yaml';
@@ -317,7 +317,7 @@ export function parseDockerComposeYaml(yamlContent: string): ParsedCompose {
   const serviceHasIngressLabels: Record<string, boolean> = {};
   const serviceVpnTargets: Record<string, string> = {};
 
-  // Track row counts per tier for clean 3-column DIN 40719 positioning
+  // Track row counts per tier for clean 3-column DIN EN 61082-1 positioning
   const rowCountPerTier: [number, number, number] = [0, 0, 0];
   const TIER_X_COORDS = [100, 520, 940] as const; // Ingress (100) -> App (520) -> DB/Cache (940)
   const ROW_HEIGHT = 240;

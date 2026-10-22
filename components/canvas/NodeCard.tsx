@@ -10,6 +10,7 @@ import { Handle, Position, type NodeProps } from 'reactflow';
 import { cn } from '@/lib/utils';
 import { ConflictBadge } from './ConflictBadge';
 import { MODULE_CATALOG } from '@/lib/data/modules';
+import { resolveModuleResources } from '@/lib/utils/hardwareEstimator';
 import { useArchitectStore } from '@/store/useArchitectStore';
 import { useI18nStore } from '@/lib/i18n/store';
 import {
@@ -175,7 +176,7 @@ function NodeCardInner({ id, data, selected }: NodeProps<ModuleNodeData>) {
     ? displayPorts.find((p) => p.hostPort !== undefined && p.hostPort > 0)?.hostPort ?? null
     : null;
 
-  const estimatedRam = effectiveDef.resources?.ramMB || (isDatabaseService ? 256 : 128);
+  const estimatedRam = effectiveDef.resources?.ramMB ?? resolveModuleResources(data.moduleId).ramMB;
 
   return (
     <div
@@ -229,7 +230,10 @@ function NodeCardInner({ id, data, selected }: NodeProps<ModuleNodeData>) {
 
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1.5 flex-wrap">
-            <p className="truncate text-xs font-bold text-[#F5F3FF] leading-tight">
+            <p
+              className="line-clamp-2 break-words text-xs font-bold text-[#F5F3FF] leading-tight"
+              title={data.label}
+            >
               {data.label}
             </p>
           </div>

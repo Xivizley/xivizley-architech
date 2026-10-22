@@ -144,6 +144,9 @@ function generateSingleServiceBlock(
 
   const moduleDef = MODULE_CATALOG.find((m) => m.id === moduleId);
   if (!isCustom && !moduleDef) return null;
+  // Platform modules without an image (Docker Engine itself) are the host
+  // runtime, not containers — emitting a block would yield `image: :`.
+  if (!isCustom && moduleDef && !moduleDef.dockerImage) return null;
 
   const serviceName = serviceInfo.serviceName;
   const lines: string[] = [];

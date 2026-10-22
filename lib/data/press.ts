@@ -47,7 +47,7 @@ export const PRESS_KIT: PressKitData = {
   title: 'XIVIZLEY',
   tagline: '134 Docker Servisi ve 33 Mimari Şablonu İçin Görsel Tasarım ve Dağıtım İstasyonu',
   oneParagraphSummary:
-    'XIVIZLEY, Linux VDS ve ev sunucuları için 134 popüler Docker servisini görsel bir tuval üzerinde bağlayarak port çakışmalarını deterministik olarak çözen, DIN 40719 endüstriyel şartnameleri, Kubernetes manifestoları ve Helm 3 paketleri üreten, TÜBİTAK 2204-A kapsamında geliştirilmiş açık kaynaklı (MIT) bir sistem mimarlığı platformudur.',
+    'XIVIZLEY, Linux VDS ve ev sunucuları için 134 popüler Docker servisini görsel bir tuval üzerinde bağlayarak port çakışmalarını deterministik olarak çözen, DIN EN 61082-1 endüstriyel şartnameleri, Kubernetes manifestoları ve Helm 3 paketleri üreten, TÜBİTAK 2204-A kapsamında geliştirilmiş açık kaynaklı (MIT) bir sistem mimarlığı platformudur.',
   founder: {
     name: 'Alperen Celal Hoşça',
     title: 'Kurucu & Sistem Mimarı (Lise 9. Sınıf Öğrencisi)',
@@ -67,7 +67,7 @@ export const PRESS_KIT: PressKitData = {
     },
     {
       label: 'Endüstriyel İhracat',
-      value: 'DIN 40719, K8s & Helm 3',
+      value: 'DIN EN 61082-1, K8s & Helm 3',
       detail: 'Teknik pafta çizimi, Kubernetes PVC/Secret ayrımı ve Helm 3 paket üretimi.',
     },
     {
@@ -104,7 +104,7 @@ export const PRESS_KIT: PressKitData = {
     {
       name: 'XIVIZLEY Architech',
       badge: '/architect',
-      description: '134 Docker servisini görsel tuvalde bağlayan, deterministik port çakışması çözücü ve DIN 40719 pafta üreteci.',
+      description: '134 Docker servisini görsel tuvalde bağlayan, deterministik port çakışması çözücü ve DIN EN 61082-1 pafta üreteci.',
     },
     {
       name: 'XIVIZLEY Space',

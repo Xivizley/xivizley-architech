@@ -13,7 +13,7 @@ import { PRESS_KIT } from '@/lib/data/press';
 export const metadata: Metadata = {
   title: 'XIVIZLEY Architech — Visual Docker Compose Architect (MIT)',
   description:
-    'Open-source visual Docker Compose architect with deterministic port conflict resolution, DIN 40719 hardware sizing and 1-click SSH deployment for 134+ self-hosted services.',
+    'Open-source visual Docker Compose architect with deterministic port conflict resolution, DIN EN 61082-1 hardware sizing and 1-click SSH deployment for 134+ self-hosted services.',
   alternates: {
     canonical: 'https://xivizley.com.tr/en',
     languages: {

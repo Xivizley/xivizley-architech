@@ -1,14 +1,13 @@
 // ============================================================
 // XIVIZLEY — Press & Media Kit Page (/press)
-// Obsidian Violet & DIN 40719 Editorial Standard
+// Obsidian Violet & DIN EN 61082-1 Editorial Standard
 // Institutional Presentation for Journalists, Partners & Media
 // ============================================================
 
 import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { PublicNav } from '@/components/shared/PublicNav';
-import { HtmlLangSync } from '@/components/shared/HtmlLangSync';
+import { Navbar } from '@/components/shared/Navbar';
 import { PRESS_KIT } from '@/lib/data/press';
 
 export const metadata: Metadata = {
@@ -54,11 +53,10 @@ export default function PressPage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-[#090514] text-[#F5F3FF] selection:bg-[#8B5CF6]/30 selection:text-white font-sans antialiased">
-      <PublicNav lang="tr" altHref="/en/press" />
-      <HtmlLangSync lang="tr" />
+      <Navbar />
 
       <main className="flex-1 mx-auto w-full max-w-5xl px-4 sm:px-6 py-12">
-        {/* DIN 40719 Header */}
+        {/* DIN EN 61082-1 Header */}
         <div className="border border-[#2B1A42] bg-[#0D0719] rounded-[2px] p-6 mb-8 relative">
           <div className="flex flex-wrap items-center gap-2 mb-3">
             <span className="font-mono text-[11px] px-2 py-0.5 rounded-[2px] bg-[#120A21] border border-[#2B1A42] text-[#C084FC]">
@@ -229,7 +227,7 @@ export default function PressPage() {
                 Basın ve yayın organları için vektörel SVG logomuz:
               </p>
               <a
-                href="https://xivizley.com.tr/icon.svg"
+                href="/icon.svg"
                 download="xivizley-logo.svg"
                 className="inline-flex items-center justify-center py-2 px-3 border border-[#8B5CF6] bg-[#120A21] hover:bg-[#1E1235] text-[#C084FC] font-mono text-[12px] rounded-[2px] transition-colors"
               >

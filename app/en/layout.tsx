@@ -9,14 +9,14 @@ import { HtmlLangSync } from '@/components/shared/HtmlLangSync';
 export const metadata: Metadata = {
   title: 'XIVIZLEY — Visual Docker Architecture & Deterministic Port Conflict Radar',
   description:
-    'Visual Docker Compose architect with deterministic port conflict detection, DIN 40719 hardware sizing radar, and 1-click SSH deployment for 134+ containers. Free & MIT open-source.',
+    'Visual Docker Compose architect with deterministic port conflict detection, DIN EN 61082-1 hardware sizing radar, and 1-click SSH deployment for 134+ containers. Free & MIT open-source.',
   keywords: [
     'visual docker compose builder',
     'docker compose generator',
     'docker compose gui',
     'docker port conflict resolver',
     'homelab architecture builder',
-    'din 40719 architecture spec',
+    'din en 61082-1 architecture spec',
     'self-hosted apps docker',
     'visual homelab designer',
     '1-click vds deploy',

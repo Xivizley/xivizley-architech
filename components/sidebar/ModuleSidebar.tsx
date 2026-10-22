@@ -394,7 +394,7 @@ export function ModuleSidebar() {
         </div>
 
         {/* Category filter chips */}
-        <div className="mt-2 flex gap-1 overflow-x-auto scrollbar-none pb-0.5">
+        <div className="mt-2 flex flex-wrap gap-1 pb-0.5">
           {categories.map((cat) => (
             <button
               key={cat}

@@ -1,7 +1,7 @@
 // ============================================================
-// XIVIZLEY — DIN 40719 Blueprint & Technical Spec Sheet
+// XIVIZLEY — DIN EN 61082-1 Blueprint & Technical Spec Sheet
 // components/modals/BlueprintModal.tsx
-// Authentic DIN 40719 / Tektronix 1970s Engineering Blueprint
+// Authentic DIN EN 61082-1 / Tektronix 1970s Engineering Blueprint
 // ============================================================
 
 'use client';
@@ -9,6 +9,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useArchitectStore } from '@/store/useArchitectStore';
 import { MODULE_CATALOG } from '@/lib/data/modules';
+import { resolveModuleResources } from '@/lib/utils/hardwareEstimator';
 import { useI18nStore } from '@/lib/i18n/store';
 import { jsPDF } from 'jspdf';
 import { toPng } from 'html-to-image';
@@ -80,7 +81,11 @@ export function BlueprintModal({ isOpen, onClose }: BlueprintModalProps) {
       const name = customContainerName || label || modDef?.name || moduleId || `service_${index + 1}`;
       const image = isCustom
         ? (customImage || 'custom:latest')
-        : (modDef ? `${modDef.dockerImage}:${modDef.defaultTag}` : `${moduleId}:latest`);
+        : !modDef
+        ? `${moduleId}:latest`
+        : modDef.dockerImage
+        ? `${modDef.dockerImage}${modDef.defaultTag ? `:${modDef.defaultTag}` : ''}`
+        : 'None (Host Runtime)';
 
       // Resolve Ports
       const ports: string[] = [];
@@ -97,10 +102,8 @@ export function BlueprintModal({ isOpen, onClose }: BlueprintModalProps) {
         });
       }
 
-      // Memory & CPU allocation
-      const ramMB = modDef?.resources?.ramMB || 512;
-      const cpuCores = modDef?.resources?.cpuCores || 1;
-      const diskGB = modDef?.resources?.diskGB || 10;
+      // Memory & CPU allocation — must match the canvas estimator exactly
+      const { ramMB, cpuCores, diskGB } = resolveModuleResources(node.data.moduleId, modDef?.resources);
 
       // Volumes
       const volumes: string[] = [];
@@ -238,7 +241,7 @@ export function BlueprintModal({ isOpen, onClose }: BlueprintModalProps) {
         heightLeft -= pageHeight;
       }
 
-      pdf.save(`xivizley-din40719-spec-${docDate}.pdf`);
+      pdf.save(`xivizley-din-en-61082-1-spec-${docDate}.pdf`);
     } catch (err) {
       console.error('Failed to generate PDF download, falling back to print dialog:', err);
       window.print();
@@ -256,7 +259,7 @@ export function BlueprintModal({ isOpen, onClose }: BlueprintModalProps) {
       role="dialog"
       aria-modal="true"
     >
-      {/* ── Print Styling Override (DIN 40719 High-Contrast Sheet) ── */}
+      {/* ── Print Styling Override (DIN EN 61082-1 High-Contrast Sheet) ── */}
       <style jsx global>{`
         @media print {
           @page {
@@ -364,7 +367,7 @@ export function BlueprintModal({ isOpen, onClose }: BlueprintModalProps) {
             </div>
             <div>
               <span className="text-xs font-bold text-[#F5F3FF] tracking-wider uppercase">
-                DIN 40719 // MÜHENDİSLİK ŞARTNAME RAPORU
+                DIN EN 61082-1 // MÜHENDİSLİK ŞARTNAME RAPORU
               </span>
               <span className="ml-2 rounded-[2px] bg-[#1E1235] border border-[#8B5CF6]/40 px-1.5 py-0.5 text-[10px] text-[#C084FC]">
                 REV 2.4.0
@@ -424,12 +427,12 @@ export function BlueprintModal({ isOpen, onClose }: BlueprintModalProps) {
               <span>[ZONE 08]</span>
             </div>
 
-            {/* 1. Title Block (Tektronix 1970s / DIN 40719 Standard Header) */}
+            {/* 1. Title Block (Tektronix 1970s / DIN EN 61082-1 Standard Header) */}
             <div className="blueprint-title-block border border-[#2B1A42] bg-[#120A21] p-4 rounded-[2px]">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border-b border-[#2B1A42] pb-4">
                 <div className="md:col-span-2">
                   <div className="text-[10px] text-[#8B7D9E] uppercase tracking-wider mb-1">
-                    NORM: DIN 40719-2 / IEC 61082-1 • ENDÜSTRİYEL SİSTEM BELGELENDİRME ŞARTNAMESİ
+                    REF: DIN EN 61082-1 / IEC 61082-1 • ENDÜSTRİYEL DİYAGRAM VE MİMARİ ŞARTNAME FORMU
                   </div>
                   <h1
                     className="text-base sm:text-lg font-bold text-[#F5F3FF] tracking-tight uppercase"
@@ -494,7 +497,7 @@ export function BlueprintModal({ isOpen, onClose }: BlueprintModalProps) {
                   <Layers className="h-4 w-4" />
                   TABLO 1: MODÜL VE KONTEYNER ENVANTER MANİFESTOSU
                 </span>
-                <span className="text-[10px] text-[#8B7D9E]">DIN 40719-MANIFEST</span>
+                <span className="text-[10px] text-[#8B7D9E]">DIN EN 61082-1 MANIFEST</span>
               </div>
 
               <div className="overflow-x-auto border border-[#2B1A42] bg-[#06030D] rounded-[2px]">
@@ -652,7 +655,7 @@ export function BlueprintModal({ isOpen, onClose }: BlueprintModalProps) {
 
             {/* Bottom Coordinate Scale */}
             <div className="flex justify-between text-[10px] text-[#8B7D9E] border-t border-[#2B1A42] pt-1 px-2 select-none tracking-widest">
-              <span>[DIN 40719-2]</span>
+              <span>[DIN EN 61082-1]</span>
               <span>1</span>
               <span>2</span>
               <span>3</span>
