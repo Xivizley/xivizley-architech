@@ -11,7 +11,7 @@
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](docker-compose.yml)
 [![Next.js](https://img.shields.io/badge/Next.js-16.3-black?logo=next.js)](https://nextjs.org)
 [![React Flow](https://img.shields.io/badge/React_Flow-11.11-FF0072)](https://reactflow.dev)
-[![Release](https://img.shields.io/badge/Release-v1.3.0-8B5CF6?logo=github)](https://github.com/Xivizley/xivizley-architect/releases)
+[![Release](https://img.shields.io/badge/Release-v1.3.1-8B5CF6?logo=github)](https://github.com/Xivizley/xivizley-architect/releases)
 [![Verified Benchmarks](https://img.shields.io/badge/Benchmarks-fio_%26_sysbench-22C55E)](/benchmark)
 
 ---
@@ -50,6 +50,14 @@ flowchart LR
 
 This release is a focused stability pass on the canvas, the spec sheet, and the
 generated artefacts. No feature was removed and no schematic format changed.
+
+### v1.3.1 — Docker build fix
+
+`pnpm-workspace.yaml` carried only `allowBuilds`, but the Dockerfile pins pnpm 9,
+which requires a `packages` field (`ERROR packages field missing or empty`). The
+GHCR image — and any `docker compose build` from a source checkout — failed from
+v1.1.1 until this patch. The manifest now declares `packages: ['.']`, valid on
+pnpm 9, 10 and 12; the lockfile is byte-identical under all three.
 
 | Area | Fix |
 | :--- | :--- |

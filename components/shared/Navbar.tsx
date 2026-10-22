@@ -105,7 +105,7 @@ export function Navbar({
                 DIN EN 61082-1
               </span>
               <span className="hidden sm:inline rounded-[2px] border border-emerald-500/30 bg-emerald-950/40 px-1 py-0.2 font-mono text-[9px] text-emerald-400">
-                v1.3.0 CORE
+                v1.3.1 CORE
               </span>
             </div>
             <span className="hidden md:inline font-mono text-[9px] text-[#8B7D9E]">

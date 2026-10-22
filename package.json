@@ -1,6 +1,6 @@
 {
   "name": "xivizley-architect",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Industrial DIN EN 61082-1 visual Docker compose architect with deterministic port conflict resolution, universal reverse engineering of docker run / bash inputs, and verified hardware benchmarks.",
   "author": "Alperen Celal Hoşça <alperencelal16@gmail.com>",
   "license": "MIT",
